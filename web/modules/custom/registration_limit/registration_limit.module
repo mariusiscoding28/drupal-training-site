@@ -1,0 +1,29 @@
+<?php
+
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function registration_limit_form_node_course_registration_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['#validate'][] = 'registration_limit_limit_course_registrations';
+}
+
+/**
+ * Custom validation handler to limit registrations per course.
+ */
+function registration_limit_limit_course_registrations($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $course_target = $form_state->getValue(['field_course_reference', 0, 'target_id']);
+
+  if (is_numeric($course_target)) {
+    $query = \Drupal::entityQuery('node')
+      ->condition('type', 'course_registration')
+      ->condition('field_course_reference.target_id', $course_target)
+      ->accessCheck(FALSE); // or ->accessCheck(TRUE) if you want to enforce permission check
+    $nids = $query->execute();
+
+    if (count($nids) >= 3) {
+      $form_state->setErrorByName('field_course_reference', t('This course has reached full capacity (3 registrants).'));
+    }
+  }
+}

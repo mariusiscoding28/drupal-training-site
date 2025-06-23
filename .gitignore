@@ -1,0 +1,16 @@
+# Ignore sensitive config files
+web/sites/default/settings.local.php
+
+# Ignore Composer-generated files
+/vendor/
+/composer.lock
+
+# Ignore Drupal cache and logs
+/tmp/
+*.log
+
+# IDE/editor/OS-specific files
+*.swp
+.DS_Store
+.idea/
+.vscode/

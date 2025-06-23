@@ -1,0 +1,14 @@
+name: My Custom Theme
+type: theme
+description: A custom sub-theme of Olivero
+core_version_requirement: ^10
+base theme: olivero
+
+libraries:
+  - mytheme/global-styling
+
+regions:
+  header: 'Header'
+  primary_menu: 'Primary menu'
+  content: 'Content'
+  footer: 'Footer'

@@ -1,0 +1,5 @@
+name: 'Registration Limit'
+type: module
+description: 'Limit course registrations to 3 per course.'
+core_version_requirement: ^10
+package: Custom
